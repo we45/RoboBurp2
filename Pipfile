@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+restinstance = "*"
+twine = "*"
+"RoboBurp2" = "*"
+
+[packages]
+requests = "*"
+robotframework = "*"
+
+[requires]
+python_version = "2.7"
