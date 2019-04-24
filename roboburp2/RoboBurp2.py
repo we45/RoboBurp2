@@ -21,20 +21,28 @@ class RoboBurp2(object):
             logger.error("Target must end with a slash for Burp to use it")
             raise Exception("Target must end with a slash for Burp to use it")
 
-    def start_burpsuite(self, burp_path):
+    def start_burpsuite(self, burp_path, user_config=None):
         '''
         starts burp in GUI Mode. You will still need to click through the options once it starts.
         :param burp_path: Absolute path of burpsuite_pro.jar file
+        :param user_config: Absolute path of user_options.json file
         '''
-        cmd = "java -jar {} --user-config-file=user_options.json".format(burp_path)
+        if user_config:
+            cmd = "java -jar {0} --user-config-file={1}".format(burp_path,user_config)
+        else:
+            cmd = "java -jar {0}".format(burp_path)
         subprocess.Popen(cmd.split(' '), stdout=open(os.devnull, 'w'))
 
-    def start_headless_burpsuite(self, burp_path):
+    def start_headless_burpsuite(self, burp_path, user_config=None):
         '''
         starts burp in HEADLESS Mode.
         :param burp_path: Absolute path of burpsuite_pro.jar file
+        :param user_config: Absolute path of user_options.json file
         '''
-        cmd = "java -Djava.awt.headless=true -jar {} --user-config-file=user_options.json".format(burp_path)
+        if user_config:
+            cmd = "java -Djava.awt.headless=true -jar {0} --user-config-file={1}".format(burp_path,user_config)
+        else:
+            cmd = "java -Djava.awt.headless=true -jar {0}".format(burp_path)        
         subprocess.Popen(cmd.split(' '), stdout=open(os.devnull, 'w'))        
 
     def initiate_crawl_and_scan_against_target(self, auth_logins = None, config_name = None):
