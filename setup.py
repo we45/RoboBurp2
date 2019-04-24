@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='RoboBurp2',
-    version='1.0',
+    version='1.1',
     packages=['roboburp2'],
     # package_dir={'': 'roboburp2'},
     url='https://www.github.com/we45/RoboBurp2',

@@ -1,4 +1,7 @@
-
+*.egg-info
 test/log.html
 test/output.xml
 test/report.html
+dist
+venv
+
