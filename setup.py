@@ -10,8 +10,8 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='RoboBurp2',
     version='1.0',
-    packages=[''],
-    package_dir={'': 'roboburp2'},
+    packages=['roboburp2'],
+    # package_dir={'': 'roboburp2'},
     url='https://www.github.com/we45/RoboBurp2',
     license='MIT',
     author='we45',
@@ -22,5 +22,6 @@ setup(
         'robotframework==3.0.4'
     ],
     long_description = long_description,
-    long_description_content_type='text/markdown'
+    long_description_content_type='text/markdown',
+    include_package_data=True
 )
