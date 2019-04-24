@@ -26,8 +26,16 @@ class RoboBurp2(object):
         starts burp in GUI Mode. You will still need to click through the options once it starts.
         :param burp_path: Absolute path of burpsuite_pro.jar file
         '''
-        cmd = "java -jar {}".format(burp_path)
+        cmd = "java -jar {} --user-config-file=user_options.json".format(burp_path)
         subprocess.Popen(cmd.split(' '), stdout=open(os.devnull, 'w'))
+
+    def start_headless_burpsuite(self, burp_path):
+        '''
+        starts burp in HEADLESS Mode.
+        :param burp_path: Absolute path of burpsuite_pro.jar file
+        '''
+        cmd = "java -Djava.awt.headless=true -jar {} --user-config-file=user_options.json".format(burp_path)
+        subprocess.Popen(cmd.split(' '), stdout=open(os.devnull, 'w'))        
 
     def initiate_crawl_and_scan_against_target(self, auth_logins = None, config_name = None):
         '''
@@ -119,6 +127,13 @@ class RoboBurp2(object):
         with open(filename, 'w') as resultsfile:
             resultsfile.write(json.dumps(scan_results['issue_events']))
         logger.info("Successfully written results to file")
+
+    def stop_burpsuite(self):
+        '''
+        stops burp process
+        '''
+        cmd = "pkill -f burp"
+        subprocess.Popen(cmd.split(' '), stdout=open(os.devnull, 'w'))        
 
 
 
