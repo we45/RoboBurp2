@@ -6,12 +6,14 @@ Library  REST  http://localhost:5050  proxies={"http": "http://127.0.0.1:8080", 
 # command: docker run -d -p 5050:5050 abhaybhargav/vul_flask
 
 *** Variables ***
-${BURP_EXEC}  /Applications/Burp_Suite_Professional.app/Contents/Resources/app/burpsuite_pro.jar
+${BURP_EXEC}  burpsuite_pro.jar
+${CONFIG_JSON}  user_options.json
+${SCAN_CONFIG}  Audit coverage - thorough 
 
 *** Test Cases ***
 Burp Start
-    start burpsuite  ${BURP_EXEC}
-    sleep  20
+    start burpsuite  ${BURP_EXEC}  ${CONFIG_JSON}
+    sleep  40
 
 Authenticate to Web Service
     &{res}=  POST  /login  {"username": "admin", "password": "admin123"}
@@ -35,7 +37,7 @@ Search Customer by Username
 
 Burp Authenticated Scan Only
     ${auth}=  create dictionary  username=bruce.banner@we45.com  password=secdevops
-    ${id}=  initiate scan against target  config_name=Audit checks - medium active
+    ${id}=  initiate scan against target  config_name=${SCAN_CONFIG}
     set suite variable  ${SCAN_ID}  ${id}
 
 Burp Scan Status

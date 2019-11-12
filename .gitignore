@@ -4,4 +4,8 @@ test/output.xml
 test/report.html
 dist
 venv
+.vscode
+test/local
 
+*.pyc
+.DS_Store

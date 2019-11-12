@@ -64,7 +64,7 @@ class RoboBurp2(object):
                 request_data['application_logins'] = [auth_logins]
 
         if config_name and isinstance(config_name,str):
-            request_data['scan_configurations'] = [{'name': config_name}]
+            request_data['scan_configurations'] = [{'name': config_name,'type':'NamedConfiguration'}]
 
         request_data['urls'] = [self.target]
 
@@ -88,7 +88,7 @@ class RoboBurp2(object):
         '''
         request_data = {}
         if config_name and isinstance(config_name,str):
-            request_data['scan_configurations'] = [{'name': config_name}]
+            request_data['scan_configurations'] = [{'name': config_name,'type':'NamedConfiguration'}]
 
         request_data['urls'] = [self.target]
         scan_request = requests.post(self.api_url + "scan", json=request_data)
